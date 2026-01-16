@@ -1,0 +1,269 @@
+:root {
+  --bg1: #050816;
+  --bg2: #0a1026;
+  --card: #0e152b;
+  --text: #e8ecf5;
+  --accent: #3aa0ff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(120deg, var(--bg1), var(--bg2));
+  background-size: 400% 400%;
+  animation: gradient 20s ease infinite;
+  scroll-behavior: smooth;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+canvas#particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+#intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.reveal-panel {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  animation: reveal 1.8s cubic-bezier(.77,0,.175,1) forwards;
+}
+
+.intro-text {
+  position: relative;
+  font-family: 'Lexend', sans-serif;
+  font-size: 2rem;
+  color: white;
+  z-index: 2;
+}
+
+@keyframes reveal {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+.hero {
+  text-align: center;
+  padding: 6rem 1rem 3rem;
+}
+
+.hero h1 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+}
+
+.tagline {
+  color: var(--accent);
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  background: rgba(5,8,22,0.8);
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+nav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.section {
+  padding: 5rem 10%;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+  gap: 1rem;
+}
+
+.grid li {
+  background: var(--card);
+  padding: 1.2rem;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap: 2rem;
+  perspective: 1000px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 18px;
+  height: 180px;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.card::before {
+  content: attr(data-title);
+  position: absolute;
+  bottom: 2.5rem;
+  left: 1.5rem;
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.2rem;
+}
+
+.card::after {
+  content: attr(data-tech);
+  position: absolute;
+  bottom: 1.2rem;
+  left: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.experience-cards .card {
+  height: 140px;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.socials a {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #0c1226;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 1.4rem;
+  transition: 0.3s;
+}
+
+.socials a:hover {
+  transform: translateY(-6px) scale(1.08);
+  box-shadow: 0 0 20px rgba(58,160,255,0.6);
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: #888;
+}
+
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #0e152b;
+  padding: 2rem 2.5rem;
+  border-radius: 18px;
+  text-align: center;
+  min-width: 300px;
+  box-shadow: 0 0 30px rgba(58,160,255,0.4);
+}
+
+.modal-content h3 {
+  font-family: 'Lexend', sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.modal-content p {
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.modal-btn {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  background: var(--accent);
+  color: black;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+}
+@media (max-width: 900px) {
+  .section {
+    padding: 5rem 8%;
+  }
+  nav {
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  nav {
+    flex-wrap: wrap;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .section {
+    padding: 4rem 6%;
+  }
+
+  .socials {
+    gap: 1.2rem;
+  }
+}
