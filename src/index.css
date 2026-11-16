@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+body { @apply bg-bg text-white font-sans min-h-screen m-0; }
+.tiles { scrollbar-width: none; }
+.tiles::-webkit-scrollbar { display: none; }
